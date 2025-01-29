@@ -1,15 +1,22 @@
-import { Text, View } from "react-native";
+import Home from '@/src/views/Home'
+import * as SplashScreen from 'expo-splash-screen'
+import { StatusBar } from 'expo-status-bar'
+import { useCallback, useEffect } from 'react'
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+    const hideSplashScreen = useCallback(async () => await SplashScreen.hideAsync(), [])
+    const hideSplashScreenWithDelay = useCallback(() => {
+        const timeInMilliseconds = 3000
+        setTimeout(hideSplashScreen, timeInMilliseconds)
+    }, [])
+
+    useEffect(hideSplashScreenWithDelay)
+
+    return (
+        /** @ts-ignore */
+        <>
+            <StatusBar style="auto" hidden />
+            <Home />
+        </>
+    )
 }
