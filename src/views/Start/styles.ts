@@ -14,5 +14,11 @@ export const styles = StyleSheet.create({
         marginTop: 32,
         width: 120,
         height: 74
+    },
+    highScore: {
+        fontFamily: 'PressStart2P',
+        fontSize: 12,
+        color: 'white',
+        marginTop: 16
     }
 })

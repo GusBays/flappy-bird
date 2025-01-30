@@ -22,7 +22,7 @@ export const Entities = (): Entity => {
     return {
         physics: { engine, world },
         Bird: bird(world, { x: 120, y: 400 }, { height: 40, width: 40 }),
-        Floor: floor(world, '#E1D694', { x: width / 2, y: height - 70 }, { height: BOTTOM + 20, width }),
+        Floor: floor(world, '#E1D694', { x: width / 2, y: height - 50 }, { height: BOTTOM + 20, width }),
         PipeTop1: pipe(
             world,
             'PipeTop1',
@@ -61,25 +61,44 @@ export const Entities = (): Entity => {
 export function Physics(entity: Entity, { touches, time, dispatch }: any) {
     const { engine } = entity.physics
 
+    if (!(engine as any)._hasCollisionEvent) {
+        ;(engine as any)._hasCollisionEvent = true
+
+        const sendGameOver = () => dispatch({ type: 'game_over' })
+        Matter.Events.on(engine, 'collisionStart', sendGameOver)
+    }
+
     const byPress = (touch: React.TouchEvent) => touch.type === 'press'
-    const setNewSpeed = (touch: React.TouchEvent) => {
+    const setNewSpeed = () => {
+        dispatch({ type: 'press' })
         Matter.Body.setVelocity(entity.Bird.body, { x: 0, y: -4 })
     }
     touches.filter(byPress).forEach(setNewSpeed)
+
+    const birdX = entity.Bird.body.position.x
 
     for (let index = 1; index <= 2; index++) {
         const top = entity[`PipeTop${index}` as keyof Entity] as PipeComponent
         const bottom = entity[`PipeBottom${index}` as keyof Entity] as PipeComponent
 
-        const setNewPosition = () => {
+        const pipeX = top.body.position.x
+
+        if (false === top.passed && birdX > pipeX) {
+            top.passed = true
+            dispatch({ type: 'score' })
+        }
+
+        const resetPositionAndPassed = () => {
             const pair = getPipesConfig(getWindowWidth() * 0.9)
 
             Matter.Body.setPosition(top.body, pair.top.position)
             Matter.Body.setPosition(bottom.body, pair.bottom.position)
+
+            top.passed = false
         }
 
         const isAfterScreen = bottom.body.bounds.max.x <= 0
-        if (isAfterScreen) setNewPosition()
+        if (isAfterScreen) resetPositionAndPassed()
 
         const addMovement = () => {
             Matter.Body.translate(top.body, { x: -3, y: 0 })
@@ -88,9 +107,6 @@ export function Physics(entity: Entity, { touches, time, dispatch }: any) {
 
         addMovement()
     }
-
-    const sendGameOver = () => dispatch({ type: 'game_over' })
-    Matter.Events.on(engine, 'collisionStart', sendGameOver)
 
     Matter.Engine.update(engine, time.delta)
 
