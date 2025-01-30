@@ -1,3 +1,3 @@
 export interface StartProps {
-    onPress: VoidFunction
+    onStart: VoidFunction
 }

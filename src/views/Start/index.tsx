@@ -4,11 +4,11 @@ import PLAY from '../../assets/play.png'
 import { styles } from './styles'
 import { StartProps } from './types'
 
-export const Start: React.FC<StartProps> = ({ onPress }) => {
+export const Start: React.FC<StartProps> = ({ onStart }) => {
     return (
         <View style={styles.container}>
             <Image source={LOGO} style={styles.logo} />
-            <TouchableWithoutFeedback onPress={onPress}>
+            <TouchableWithoutFeedback onPress={onStart}>
                 <Image source={PLAY} style={styles.play} />
             </TouchableWithoutFeedback>
         </View>
