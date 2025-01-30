@@ -5,7 +5,7 @@ import React from 'react'
 import { Image } from 'react-native'
 import BIRD from '../../assets/bird.png'
 import { styles } from './styles'
-import { BirdProps } from './types'
+import { BirdComponent, BirdProps } from './types'
 
 const Bird: React.FC<BirdProps> = (props: BirdProps) => {
     const width = props.body.bounds.max.x - props.body.bounds.min.x
@@ -17,7 +17,7 @@ const Bird: React.FC<BirdProps> = (props: BirdProps) => {
     return <Image source={BIRD} style={styles(x, y, width, height).bird} />
 }
 
-export default (world: Matter.World, position: Position, size: Size) => {
+export default (world: Matter.World, position: Position, size: Size): BirdComponent => {
     const { x, y } = position
     const { width, height } = size
     const label = 'Bird'
