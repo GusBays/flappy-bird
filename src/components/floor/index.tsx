@@ -1,8 +1,9 @@
 import { Position } from '@/src/@types/position'
 import { Size } from '@/src/@types/size'
 import Matter from 'matter-js'
+import { View } from 'react-native'
 import { styles } from './styles'
-import { FloorProps } from './types'
+import { FloorComponent, FloorProps } from './types'
 
 const Floor: React.FC<FloorProps> = (props: FloorProps) => {
     const width = props.body.bounds.max.x - props.body.bounds.min.x
@@ -13,10 +14,10 @@ const Floor: React.FC<FloorProps> = (props: FloorProps) => {
 
     const { color } = props
 
-    return <Image source={FLOOR} style={styles(x, y, width, height, color).floor} />
+    return <View style={styles(x, y, width, height, color).floor} />
 }
 
-export default (world: Matter.World, color: string, position: Position, size: Size) => {
+export default (world: Matter.World, color: string, position: Position, size: Size): FloorComponent => {
     const { x, y } = position
     const { width, height } = size
     const label = 'Floor'
@@ -29,6 +30,7 @@ export default (world: Matter.World, color: string, position: Position, size: Si
         body: floor,
         color,
         position,
+        size,
         /** @ts-ignore */
         renderer: <Floor />
     }

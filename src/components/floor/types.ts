@@ -8,3 +8,7 @@ export interface FloorProps {
     position: Position
     size: Size
 }
+
+export interface FloorComponent extends FloorProps {
+    renderer: JSX.Element
+}
