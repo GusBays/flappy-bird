@@ -3,10 +3,10 @@ import { Size } from '@/src/@types/size'
 import Matter from 'matter-js'
 import React from 'react'
 import { Image, ImageSourcePropType } from 'react-native'
-import PIPE_GREEN_TOP from '../../assets/pipe-green-inverted.png'
-import PIPE_GREEN_BOTTOM from '../../assets/pipe-green.png'
-import PIPE_ORANGE_TOP from '../../assets/pipe-orange-inverted.png'
-import PIPE_ORANGE_BOTTOM from '../../assets/pipe-orange.png'
+import PIPE_GREEN_TOP from '../../assets/images/pipe-green-inverted.png'
+import PIPE_GREEN_BOTTOM from '../../assets/images/pipe-green.png'
+import PIPE_ORANGE_TOP from '../../assets/images/pipe-orange-inverted.png'
+import PIPE_ORANGE_BOTTOM from '../../assets/images/pipe-orange.png'
 import { styles } from './styles'
 import { PipeComponent, PipeProps, PipeType, PipeVariant } from './types'
 
@@ -49,6 +49,7 @@ export default (
         type,
         position,
         size,
+        passed: false,
         /** @ts-ignore */
         renderer: <Pipe />
     }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Image, View } from 'react-native'
-import GAME_OVER from '../../assets/game-over.png'
+import GAME_OVER from '../../assets/images/game-over.png'
 import { styles } from './styles'
 import { GameOverProps } from './types'
 

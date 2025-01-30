@@ -3,7 +3,7 @@ import { Size } from '@/src/@types/size'
 import Matter from 'matter-js'
 import React from 'react'
 import { Image } from 'react-native'
-import BIRD from '../../assets/bird.png'
+import BIRD from '../../assets/images/bird.png'
 import { styles } from './styles'
 import { BirdComponent, BirdProps } from './types'
 

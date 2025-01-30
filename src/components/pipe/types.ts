@@ -8,6 +8,7 @@ export interface PipeProps {
     type: PipeType
     position: Position
     size: Size
+    passed: boolean
 }
 
 export interface PipeComponent extends PipeProps {
