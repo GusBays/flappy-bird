@@ -3,12 +3,12 @@ import { Size } from '@/src/@types/size'
 import Matter from 'matter-js'
 import React from 'react'
 import { Image, ImageSourcePropType } from 'react-native'
-import PIPE_GREEN_INVERTED from '../../assets/pipe-green-inverted.png'
-import PIPE_GREEN from '../../assets/pipe-green.png'
-import PIPE_RED_INVERTED from '../../assets/pipe-red-inverted.png'
-import PIPE_RED from '../../assets/pipe-red.png'
+import PIPE_GREEN_TOP from '../../assets/pipe-green-inverted.png'
+import PIPE_GREEN_BOTTOM from '../../assets/pipe-green.png'
+import PIPE_ORANGE_TOP from '../../assets/pipe-orange-inverted.png'
+import PIPE_ORANGE_BOTTOM from '../../assets/pipe-orange.png'
 import { styles } from './styles'
-import { PipeProps, PipeType, PipeVariant } from './types'
+import { PipeComponent, PipeProps, PipeType, PipeVariant } from './types'
 
 const Pipe: React.FC<PipeProps> = (props: PipeProps) => {
     const width = props.body.bounds.max.x - props.body.bounds.min.x
@@ -20,8 +20,8 @@ const Pipe: React.FC<PipeProps> = (props: PipeProps) => {
     const { variant, type } = props
 
     const variants: Record<PipeVariant, ImageSourcePropType> = {
-        [PipeVariant.GREEN]: PipeType.NORMAL === type ? PIPE_GREEN : PIPE_GREEN_INVERTED,
-        [PipeVariant.RED]: PipeType.NORMAL === type ? PIPE_RED : PIPE_RED_INVERTED
+        [PipeVariant.GREEN]: PipeType.BOTTOM === type ? PIPE_GREEN_BOTTOM : PIPE_GREEN_TOP,
+        [PipeVariant.ORANGE]: PipeType.BOTTOM === type ? PIPE_ORANGE_BOTTOM : PIPE_ORANGE_TOP
     }
     const source = variants[variant]
 
@@ -35,7 +35,7 @@ export default (
     type: PipeType,
     position: Position,
     size: Size
-) => {
+): PipeComponent => {
     const { x, y } = position
     const { width, height } = size
 
@@ -48,6 +48,7 @@ export default (
         variant,
         type,
         position,
+        size,
         /** @ts-ignore */
         renderer: <Pipe />
     }

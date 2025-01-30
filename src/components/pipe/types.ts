@@ -10,12 +10,26 @@ export interface PipeProps {
     size: Size
 }
 
+export interface PipeComponent extends PipeProps {
+    renderer: JSX.Element
+}
+
 export enum PipeVariant {
     GREEN = 'green',
-    RED = 'red'
+    ORANGE = 'orange'
 }
 
 export enum PipeType {
-    NORMAL = 'normal',
-    INVERTED = 'inverted'
+    BOTTOM = 'bottom',
+    TOP = 'top'
+}
+
+export interface PipeConfig {
+    position: Position
+    size: Size
+}
+
+export interface PipesConfig {
+    top: PipeConfig
+    bottom: PipeConfig
 }
